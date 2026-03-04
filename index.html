@@ -676,7 +676,24 @@ await import("//creatusabor.store/cdn/shopifycloud/shop-js/modules/v2/chunk.moda
 
 })();</script>
 <script defer="" src="js/shopify-perf-kit-3.2.0.min.js" data-application="storefront-renderer" data-shop-id="88860164424" data-render-region="gcp-europe-west4" data-page-type="product" data-theme-instance-id="171835130184" data-theme-name="Dawn" data-theme-version="15.3.0" data-monorail-region="shop_domain" data-resource-timing-sampling-rate="10" data-shs="true" data-shs-beacon="true" data-shs-export-with-fetch="true" data-shs-logs-sample-rate="1" data-shs-beacon-endpoint="https://creatusabor.store/api/collect"></script>
-<script>window.ShopifyAnalytics = window.ShopifyAnalytics || {};window.ShopifyAnalytics.performance = window.ShopifyAnalytics.performance || {};(function () {const LONG_FRAME_THRESHOLD = 50;const longAnimationFrames = [];let activeRafId = null;function collectLongFrames() {let previousTime = null;function rafMonitor(now) {if (activeRafId === null) {return;}const delta = now - previousTime;if (delta > LONG_FRAME_THRESHOLD) {longAnimationFrames.push({startTime: previousTime,endTime: now,});}previousTime = now;activeRafId = requestAnimationFrame(rafMonitor);}previousTime = performance.now();activeRafId = requestAnimationFrame(rafMonitor);}if (!PerformanceObserver.supportedEntryTypes.includes('long-animation-frame')) {collectLongFrames();const timeoutId = setTimeout(() => {cancelAnimationFrame(activeRafId);}, 10_000);window.ShopifyAnalytics.performance.getLongAnimationFrames = function(stopCollection = false) {if (stopCollection) {clearTimeout(timeoutId);cancelAnimationFrame(activeRafId);}return longAnimationFrames;};}})();</script></head>
+<script>window.ShopifyAnalytics = window.ShopifyAnalytics || {};window.ShopifyAnalytics.performance = window.ShopifyAnalytics.performance || {};(function () {const LONG_FRAME_THRESHOLD = 50;const longAnimationFrames = [];let activeRafId = null;function collectLongFrames() {let previousTime = null;function rafMonitor(now) {if (activeRafId === null) {return;}const delta = now - previousTime;if (delta > LONG_FRAME_THRESHOLD) {longAnimationFrames.push({startTime: previousTime,endTime: now,});}previousTime = now;activeRafId = requestAnimationFrame(rafMonitor);}previousTime = performance.now();activeRafId = requestAnimationFrame(rafMonitor);}if (!PerformanceObserver.supportedEntryTypes.includes('long-animation-frame')) {collectLongFrames();const timeoutId = setTimeout(() => {cancelAnimationFrame(activeRafId);}, 10_000);window.ShopifyAnalytics.performance.getLongAnimationFrames = function(stopCollection = false) {if (stopCollection) {clearTimeout(timeoutId);cancelAnimationFrame(activeRafId);}return longAnimationFrames;};}})();</script>
+<!-- Utmify Scripts -->
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+<script>
+  window.pixelId = "699c8fcb451491335ad5c700";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+</head>
 
   <body class="gradient animate--hover-3d-lift">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
