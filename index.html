@@ -483,14 +483,14 @@ src="https://www.facebook.com/tr?id=1197180419164397&ev=PageView&noscript=1"
     console.log('🔄 Botão COMPRAR clicado!');
     console.log('💰 Dados da conversão:', window.utmifyConversionData);
 
-    // META PIXEL - Tracking de Purchase
+    // META PIXEL - Tracking de Início de Checkout (NÃO é compra ainda!)
     if (typeof fbq !== 'undefined') {
-      fbq('track', 'Purchase', {
+      fbq('track', 'InitiateCheckout', {
         value: 9.99,
         currency: 'USD',
         content_name: '2000 Recetas Saludables'
       });
-      console.log('✅ Meta Pixel: Purchase event enviado! Valor: $9.99 USD');
+      console.log('✅ Meta Pixel: InitiateCheckout event enviado (clique em COMPRAR)');
     } else {
       console.warn('⚠️ Meta Pixel (fbq) não está carregado');
     }
