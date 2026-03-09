@@ -11,6 +11,25 @@
 
     
 
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1197180419164397');
+fbq('track', 'PageView');
+console.log('✅ Meta Pixel carregado - ID: 1197180419164397');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1197180419164397&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <meta property="og:site_name" content="CTS">
 <meta property="og:title" content="+2000 Recetas Saludables Digitales 0% Azúcar + ¡6 BONOS de Regalo!">
 <meta property="og:type" content="product">
@@ -464,14 +483,22 @@
     console.log('🔄 Botão COMPRAR clicado!');
     console.log('💰 Dados da conversão:', window.utmifyConversionData);
 
-    // O Utmify Pixel geralmente rastreia cliques automaticamente
-    // Vamos apenas logar e deixar o pixel fazer o trabalho
-    console.log('✅ Evento de conversão registrado (tracking automático do pixel)');
+    // META PIXEL - Tracking de Purchase
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Purchase', {
+        value: 9.99,
+        currency: 'USD',
+        content_name: '2000 Recetas Saludables'
+      });
+      console.log('✅ Meta Pixel: Purchase event enviado! Valor: $9.99 USD');
+    } else {
+      console.warn('⚠️ Meta Pixel (fbq) não está carregado');
+    }
 
-    // Se existir a função, chamar também manualmente
+    // Utmify (mantido como fallback)
     if (typeof window.uniloadConversion === 'function') {
       window.uniloadConversion();
-      console.log('✅ Também chamado uniloadConversion() manualmente');
+      console.log('✅ Utmify: Conversão também enviada');
     }
   };
 </script>
