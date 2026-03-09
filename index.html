@@ -421,84 +421,17 @@ src="https://www.facebook.com/tr?id=1197180419164397&ev=PageView&noscript=1"
 
 <!-- END app block --><script src="js/lb-selleasy.js" type="text/javascript" defer="defer"></script>
 <script src="js/gsc-countdown-widget.js" type="text/javascript" defer="defer"></script>
-<!-- Utmify Scripts -->
+
+<!-- Meta Pixel - Tracking de InitiateCheckout -->
 <script>
-  window.pixelId = "699c8fcb451491335ad5c700";
-  console.log('🔵 Iniciando carregamento Utmify. Pixel ID:', window.pixelId);
-</script>
-
-<script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-subids
-  onload="console.log('✅ Script utms/latest.js carregado')"
-  onerror="console.error('❌ ERRO ao carregar utms/latest.js')"
-></script>
-
-<script>
-  var pixelScript = document.createElement("script");
-  pixelScript.src = "https://cdn.utmify.com.br/scripts/pixel/pixel.js";
-  pixelScript.onload = function() {
-    console.log('✅ Script pixel.js carregado');
-  };
-  pixelScript.onerror = function() {
-    console.error('❌ ERRO ao carregar pixel.js');
-  };
-  document.head.appendChild(pixelScript);
-</script>
-
-<!-- Utmify Conversion Tracking -->
-<script>
-  // Configurar rastreamento de conversão
-  window.utmifyConversionData = {
-    value: 9.99,
-    currency: 'USD',
-    product_name: '2000 Recetas Saludables'
-  };
-
-  // Verificar carregamento do Utmify após a página carregar
-  window.addEventListener('load', function() {
-    setTimeout(function() {
-      // Verificar várias possíveis funções do Utmify
-      console.log('🔍 Verificando funções Utmify disponíveis...');
-      console.log('window.uniloadConversion:', typeof window.uniloadConversion);
-      console.log('window.utmify:', typeof window.utmify);
-      console.log('window.utmifyTracker:', typeof window.utmifyTracker);
-
-      // Listar todas as funções que começam com 'uni' ou 'utm'
-      var utmifyFunctions = Object.keys(window).filter(function(key) {
-        return (key.toLowerCase().includes('uni') || key.toLowerCase().includes('utm')) && typeof window[key] === 'function';
-      });
-      console.log('📋 Funções relacionadas ao Utmify:', utmifyFunctions);
-
-      if (typeof window.uniloadConversion === 'function') {
-        console.log('✅ Utmify carregado com sucesso! Pixel ID: ' + window.pixelId);
-      } else {
-        console.warn('⚠️ Função uniloadConversion não encontrada, mas pixel pode estar funcionando automaticamente');
-      }
-    }, 3000);
-  });
-
-  // Função para disparar conversão manualmente
   window.triggerUtmifyConversion = function() {
-    console.log('🔄 Botão COMPRAR clicado!');
-    console.log('💰 Dados da conversão:', window.utmifyConversionData);
-
-    // META PIXEL - Tracking de Início de Checkout (NÃO é compra ainda!)
     if (typeof fbq !== 'undefined') {
       fbq('track', 'InitiateCheckout', {
         value: 9.99,
         currency: 'USD',
         content_name: '2000 Recetas Saludables'
       });
-      console.log('✅ Meta Pixel: InitiateCheckout event enviado (clique em COMPRAR)');
-    } else {
-      console.warn('⚠️ Meta Pixel (fbq) não está carregado');
-    }
-
-    // Utmify (mantido como fallback)
-    if (typeof window.uniloadConversion === 'function') {
-      window.uniloadConversion();
-      console.log('✅ Utmify: Conversão também enviada');
+      console.log('✅ Meta Pixel: InitiateCheckout enviado');
     }
   };
 </script>
