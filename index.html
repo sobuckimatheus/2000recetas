@@ -702,26 +702,80 @@ await import("//creatusabor.store/cdn/shopifycloud/shop-js/modules/v2/chunk.moda
     currency: 'USD',
     product_name: '2000 Recetas Saludables'
   };
-  
+
+  // Verificar carregamento do Utmify após a página carregar
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      if (typeof window.uniloadConversion === 'function') {
+        console.log('✅ Utmify carregado com sucesso! Pixel ID: ' + window.pixelId);
+      } else {
+        console.error('❌ Utmify NÃO carregou. Verifique: 1) Conexão com CDN, 2) Pixel ID: ' + window.pixelId);
+      }
+    }, 2000);
+  });
+
   // Função para disparar conversão manualmente
   window.triggerUtmifyConversion = function() {
-    if (typeof window.uniloadConversions === 'function') {
-      window.uniloadConversions();
+    console.log('🔄 Utmify: Tentando disparar conversão...');
+
+    // Verificar se a função Utmify está disponível (nome correto: uniloadConversion)
+    if (typeof window.uniloadConversion === 'function') {
+      window.uniloadConversion();
+      console.log('✅ Utmify: Conversão disparada com sucesso via uniloadConversion()');
+    } else {
+      console.warn('⚠️ Utmify: Função uniloadConversion não encontrada. Script pode não ter carregado ainda.');
+
+      // Tentar novamente após um pequeno delay
+      setTimeout(function() {
+        if (typeof window.uniloadConversion === 'function') {
+          window.uniloadConversion();
+          console.log('✅ Utmify: Conversão disparada com sucesso (segunda tentativa)');
+        } else {
+          console.error('❌ Utmify: Script não carregou. Verifique se o pixel ID está correto: ' + window.pixelId);
+        }
+      }, 300);
     }
-    // Também tentar com gtag se disponível
-    if (typeof gtag === 'function') {
-      gtag('event', 'conversion', {
-        'send_to': 'UTMIFY',
-        'value': window.utmifyConversionData.value,
-        'currency': window.utmifyConversionData.currency
-      });
-    }
-    console.log('Utmify: Conversão disparada');
   };
+</script>
+
+<!-- Remover bloqueios de clique direito e DevTools -->
+<script>
+  // Executar IMEDIATAMENTE - desabilitar todas as proteções
+  (function() {
+    'use strict';
+
+    // Força permitir tudo
+    document.oncontextmenu = null;
+    document.onselectstart = null;
+    document.oncopy = null;
+    document.oncut = null;
+    document.onpaste = null;
+    document.ondragstart = null;
+
+    // Sobrescrever addEventListener para bloquear proteções futuras
+    var originalAddEventListener = EventTarget.prototype.addEventListener;
+    EventTarget.prototype.addEventListener = function(type, listener, options) {
+      // Bloquear eventos que tentam desabilitar clique direito
+      if (type === 'contextmenu' || type === 'selectstart' || type === 'copy' || type === 'cut') {
+        console.log('🔓 Bloqueio de "' + type + '" impedido');
+        return;
+      }
+      return originalAddEventListener.call(this, type, listener, options);
+    };
+
+    // Limpar todas as proteções periodicamente
+    setInterval(function() {
+      document.oncontextmenu = null;
+      document.onselectstart = null;
+      document.oncopy = null;
+    }, 100);
+
+    console.log('🔓 PROTEÇÃO ATIVA - clique direito sempre habilitado');
+  })();
 </script>
 </head>
 
-  <body class="gradient animate--hover-3d-lift">
+  <body class="gradient animate--hover-3d-lift" oncontextmenu="return true;" onselectstart="return true;" oncopy="return true;">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       Ir directamente al contenido
     </a><!-- BEGIN sections: header-group -->
@@ -1077,7 +1131,7 @@ await import("//creatusabor.store/cdn/shopifycloud/shop-js/modules/v2/chunk.moda
         <span class="svg-wrapper"><svg class="icon icon-error" viewBox="0 0 13 13"><circle cx="6.5" cy="6.5" r="5.5" stroke="#fff" stroke-width="2"></circle><circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width=".7"></circle><path fill="#fff" d="m5.874 3.528.1 4.044h1.053l.1-4.044zm.627 6.133c.38 0 .68-.288.68-.656s-.3-.656-.68-.656-.681.288-.681.656.3.656.68.656"></path><path fill="#fff" stroke="#EB001B" stroke-width=".7" d="M5.874 3.178h-.359l.01.359.1 4.044.008.341h1.736l.008-.341.1-4.044.01-.359H5.873Zm.627 6.833c.56 0 1.03-.432 1.03-1.006s-.47-1.006-1.03-1.006-1.031.432-1.031 1.006.47 1.006 1.03 1.006Z"></path></svg>
 </span>
         <span class="product-form__error-message"></span>
-      </div><form method="post" action="https://pay.hotmart.com/J104742564L?checkoutMode=10" id="product-form-template--24237527662920__main" accept-charset="UTF-8" class="form" enctype="multipart/form-data" novalidate="novalidate" data-type="add-to-cart-form"><input type="hidden" name="form_type" value="product"><input type="hidden" name="utf8" value="✓"><input type="hidden" name="id" value="50977869726024" class="product-variant-id"><div class="product-form__buttons"><button id="ProductSubmitButton-template--24237527662920__main" type="submit" name="add" class="product-form__submit button button--full-width button--secondary" onclick="window.triggerUtmifyConversion();setTimeout(function(){window.location.href='https://pay.hotmart.com/J104742564L?checkoutMode=10';},500);return false;">
+      </div><form method="post" action="https://pay.hotmart.com/J104742564L?checkoutMode=10" id="product-form-template--24237527662920__main" accept-charset="UTF-8" class="form" enctype="multipart/form-data" novalidate="novalidate" data-type="add-to-cart-form"><input type="hidden" name="form_type" value="product"><input type="hidden" name="utf8" value="✓"><input type="hidden" name="id" value="50977869726024" class="product-variant-id"><div class="product-form__buttons"><button id="ProductSubmitButton-template--24237527662920__main" type="submit" name="add" class="product-form__submit button button--full-width button--secondary" onclick="window.triggerUtmifyConversion();setTimeout(function(){window.location.href='https://pay.hotmart.com/J104742564L?checkoutMode=10';},800);return false;">
             <span>COMPRAR AHORA
 </span>
 
