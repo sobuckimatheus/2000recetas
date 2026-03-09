@@ -403,20 +403,28 @@
 <!-- END app block --><script src="js/lb-selleasy.js" type="text/javascript" defer="defer"></script>
 <script src="js/gsc-countdown-widget.js" type="text/javascript" defer="defer"></script>
 <!-- Utmify Scripts -->
+<script>
+  window.pixelId = "699c8fcb451491335ad5c700";
+  console.log('🔵 Iniciando carregamento Utmify. Pixel ID:', window.pixelId);
+</script>
+
 <script
   src="https://cdn.utmify.com.br/scripts/utms/latest.js"
   data-utmify-prevent-subids
-  async
-  defer
+  onload="console.log('✅ Script utms/latest.js carregado')"
+  onerror="console.error('❌ ERRO ao carregar utms/latest.js')"
 ></script>
 
 <script>
-  window.pixelId = "699c8fcb451491335ad5c700";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-  document.head.appendChild(a);
+  var pixelScript = document.createElement("script");
+  pixelScript.src = "https://cdn.utmify.com.br/scripts/pixel/pixel.js";
+  pixelScript.onload = function() {
+    console.log('✅ Script pixel.js carregado');
+  };
+  pixelScript.onerror = function() {
+    console.error('❌ ERRO ao carregar pixel.js');
+  };
+  document.head.appendChild(pixelScript);
 </script>
 
 <!-- Utmify Conversion Tracking -->
